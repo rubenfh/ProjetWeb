@@ -43,5 +43,19 @@ Router.get("/", (req: any, res: any) => {
     .render("homepage.ejs")
 });
 
+Router.get("/signIn", (req: any, res: any) => {
+  res
+    .type("html")
+    .status(200)
+    .render("signIn.ejs")
+});
+
+Router.get("/signUp", (req: any, res: any) => {
+  res
+    .type("html")
+    .status(200)
+    .render("signUp.ejs")
+});
+
 
 module.exports = Router;
