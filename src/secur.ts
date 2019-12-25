@@ -11,15 +11,16 @@ function encrypt(text:any) {
     return { iv: iv.toString('hex'), encryptedData: encrypted.toString('hex') };
 }
 
-function decrypt(text:any) {
-    let iv = Buffer.from(text.iv, 'hex');
-    let encryptedText = Buffer.from(text.encryptedData, 'hex');
+function decrypt(iv:any,encryptedText:any) {
     let decipher = cryp.createDecipheriv('aes-256-cbc', Buffer.from(key), iv);
     let decrypted = decipher.update(encryptedText);
     decrypted = Buffer.concat([decrypted, decipher.final()]);
     return decrypted.toString();
 }
 
+module.exports.encrypt = encrypt;
+module.exports.decrypt = decrypt;
+
 var hw = encrypt("Some serious stuff")
 console.log(hw)
-console.log(decrypt(hw))
+// console.log(decrypt(hw))
