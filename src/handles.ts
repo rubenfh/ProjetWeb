@@ -1,5 +1,6 @@
 const express = require("express");
 const Router = express.Router();
+const User = require('./user');
 
 const f_welcome = () => {
   return `
@@ -42,6 +43,59 @@ Router.get("/", (req: any, res: any) => {
     .status(200)
     .render("homepage.ejs")
 });
+
+Router.get("/signIn", (req: any, res: any) => {
+  res
+    .type("html")
+    .status(200)
+    .render("signIn.ejs")
+});
+
+Router.get("/signUp", (req: any, res: any) => {
+  res
+    .type("html")
+    .status(200)
+    .render("signUp.ejs")
+});
+
+Router.get("/hello", (req: any, res: any) => {
+  res
+    .type("html")
+    .status(200)
+    .render("hello.ejs")
+});
+
+Router.get('/read', (req:any, res:any) => {
+  User.find({}).then((result: any) => {
+    res.status(200).json(result);
+  }).catch((err:any) => {
+    res.status(400).send(err.message);
+  });
+});
+
+Router.get('/write', (req:any, res:any) => {
+  User.create({
+    email: req.body.name,
+    password: req.body.password,
+    firstName: 'hello',
+    lastName: 'world'
+  }).then((result:any) => {
+    res.status(200).send("User saved !");
+  }).catch((err:any) => {
+    res.status(400).send(err.message);
+  });
+});
+
+Router.get('/item/add', (req:any,res:any) => {
+  User.create({
+    email: 'test@Worklet.com',
+    password: req.body.password,
+    firstName : 'hello',
+    lastName : req.body.name
+  }).then(()=>
+    res.redirect('/')
+  );
+})
 
 
 module.exports = Router;
