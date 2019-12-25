@@ -1,5 +1,6 @@
 import express = require("express");
 import { MetricsHandler } from "./metrics";
+
 const mongoose = require('mongoose');
 const app = express(),
   handles = require("./handles"),
@@ -8,6 +9,7 @@ const app = express(),
   secur = require("./secur");
 const port: string = process.env.PORT || "8080";
 var User = require('./user');
+
 
 mongoose.connect('mongodb://mongodb:27017/mydb', {
   useCreateIndex: true,
@@ -36,11 +38,23 @@ mongoose.connect('mongodb://mongodb:27017/mydb', {
   };
 
   app.post('/item/add', (req:any,res:any) => {
+    console.log(req.body.email);
+    var pwd = secur.encrypt(JSON.stringify(req.body.password));
+    var tabpwd = [];
+    tabpwd.push(pwd.iv);
+    tabpwd.push(pwd.encryptedData);
+    console.log(pwd.iv)
+
+    let iv = Buffer.from(pwd.iv, 'hex');
+    let encryptedText = Buffer.from(pwd.encryptedData, 'hex');
+    var decripted = secur.decrypt(iv,encryptedText);
+    console.log("decripted :::::" + decripted);
+
     User.create({
-      email: req.body.name+'@Worklet.com',
-      password: req.body.password,
-      firstName : 'hello',
-      lastName : req.body.name
+      email: req.body.email,
+      password : tabpwd,
+      firstName : req.body.firstname,
+      lastName : req.body.lastname
     }).then(()=>
       res.redirect('/')
     );
