@@ -75,8 +75,8 @@ Router.get('/read', (req:any, res:any) => {
 
 Router.get('/write', (req:any, res:any) => {
   User.create({
-    email: 'hello@world.com',
-    password: 'password',
+    email: req.body.name,
+    password: req.body.password,
     firstName: 'hello',
     lastName: 'world'
   }).then((result:any) => {
@@ -85,6 +85,17 @@ Router.get('/write', (req:any, res:any) => {
     res.status(400).send(err.message);
   });
 });
+
+Router.get('/item/add', (req:any,res:any) => {
+  User.create({
+    email: 'test@Worklet.com',
+    password: req.body.password,
+    firstName : 'hello',
+    lastName : req.body.name
+  }).then(()=>
+    res.redirect('/')
+  );
+})
 
 
 module.exports = Router;
