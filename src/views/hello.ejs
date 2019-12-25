@@ -1,26 +1,53 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <% include partials/head %>
-  </head>
-  <body class="container">
-    <div class="col-md-6 col-md-offset-3">
-      <h1>Hello</h1>
-      <button class="btn btn-success" id="show-metrics">
-        Bring the metrics
-      </button>
-      <div id="metrics"></div>
+
+<head>
+  <% include partials/head %>
+</head>
+
+<div class="container Accueil">
+  <header class="Accueil-Header">
+    <h1>NODE PROJECT</h1>
+  </header>
+
+  <p>HELLO!!</p>
+
+  <div class="container">
+    <button type="button" class="btn btn-danger" style="margin-top: 40px;" onclick="window.location.replace('/logout')">
+      Log out
+    </button>
+    <h1 style="margin-top: 80px;margin-bottom: 20px; font-weight: 700;">Add/Update metrics :</h1>
+  
+    <div>
+  
+  
+  
+      <form id="form">
+        <div class="row">
+          <div class="col">
+            date ( MM/DD/YYYY )
+            <input name="timestamp" type="text" class="form-control" placeholder="Time" />
+          </div>
+          <div class="col-12">
+            value
+            <input name="value" type="number" class="form-control" placeholder="value" />
+          </div>
+          <div class="col-12">
+            </br>
+            <button type="submit" class="btn btn-success">Save - Update</button>
+          </div>
+        </div>
+      </form>
     </div>
-    <script>
-      $("#show-metrics").click(e => {
-        e.preventDefault();
-        $.getJSON("/metrics.json", {}, data => {
-          const content = data.map(d => {
-            return "timestamp: " + d.timestamp + ", value: " + d.value + "";
-          });
-          $("#metrics").append(content.join("\n"));
-        });
-      });
-    </script>
-  </body>
+    <h1 style="margin-top: 80px;font-weight: 700;">My metrics</h1>
+    <canvas style="margin-top: 80px;" id="line-chart" width="800" height="450"></canvas>
+    <h2 style="margin-top: 80px;"> timestamp/(date)/value/action:</h2>
+    <ul style="margin-bottom: 100px;" id="metrics" class="list-group"></ul>
+  </div>
+
+
+</div>
+
+</body>
+
 </html>

@@ -1,5 +1,6 @@
 const express = require("express");
 const Router = express.Router();
+const User = require('./user');
 
 const f_welcome = () => {
   return `
@@ -55,6 +56,34 @@ Router.get("/signUp", (req: any, res: any) => {
     .type("html")
     .status(200)
     .render("signUp.ejs")
+});
+
+Router.get("/hello", (req: any, res: any) => {
+  res
+    .type("html")
+    .status(200)
+    .render("hello.ejs")
+});
+
+Router.get('/read', (req:any, res:any) => {
+  User.find({}).then((result: any) => {
+    res.status(200).json(result);
+  }).catch((err:any) => {
+    res.status(400).send(err.message);
+  });
+});
+
+Router.get('/write', (req:any, res:any) => {
+  User.create({
+    email: 'hello@world.com',
+    password: 'password',
+    firstName: 'hello',
+    lastName: 'world'
+  }).then((result:any) => {
+    res.status(200).send("User saved !");
+  }).catch((err:any) => {
+    res.status(400).send(err.message);
+  });
 });
 
 
