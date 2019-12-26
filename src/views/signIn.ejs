@@ -6,18 +6,23 @@
 </head>
 
 
+
 <body>
     <h1>My Node App</h1>
-    <form method="post" action="/item/add">
-      <label for="name">Last Name</label>
-      <input type="text" name="lastname">
-      <label for="name">First Name</label>
-      <input type="text" name="firstname">
-      <label for="password">Password</label>
-      <input type="password" name="password">
+
+    <div class="btnHome">
+      <form action="/">
+          <input type="submit" value="Home" />
+      </form>
+    </div>
+
+    <h2 style="text-align: center;">Sign In</h2>
+    <form method="post" action="/signin_verif">
       <label for="name">Email</label>
       <input type="text" name="email">
-      <input type="submit" value="Add">
+      <label for="password">Password</label>
+      <input type="password" name="password">
+      <input type="submit" value="Add" id="submitbtnsignin">
     </form>
 </body>
 

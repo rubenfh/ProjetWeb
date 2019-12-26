@@ -9,29 +9,24 @@
     <header class="Accueil-Header">
         <h1>NODE PROJECT</h1>
     </header>
+    <div class="btnHome">
+        <form action="/">
+            <input type="submit" value="Home" />
+        </form>
+    </div>
 
-    <p>SIGN IN PAGE</p>
+    <h2 style="text-align: center;">SIGN UP PAGE</h2>
 
-    <form id="form" action='/item/add'>
-        <div class="form-group">
-            <label for="email">Email address</label>
-            <input name="email" type="email" class="form-control" id="email" />
-        </div>
-        <div class="form-group">
-            <label for="pseudo">Pseudo</label>
-            <input name="firstname" type="text" class="form-control" id="firstname" />
-        </div>
-        <div class="form-group">
-            <label for="password">Password</label>
-            <input name="password" type="password" class="form-control" id="password" />
-        </div>
-        <div class="form-group">
-            <label for="lastname">Last name</label>
-            <input name="lastname" type="text" class="form-control" id="lastname" />
-        </div>
-        <div id="alert" class="alert alert-danger" style="display: none;" role="alert"></div>
-        <button type="submit" class="btn btn-primary">Submit</button>
-        <a href="/signIn" style="float: right" class="card-link">Login</a>
+    <form method="post" action="/item/add">
+        <label for="name">Last Name</label>
+        <input type="text" name="lastname">
+        <label for="name">First Name</label>
+        <input type="text" name="firstname">
+        <label for="password">Password</label>
+        <input type="password" name="password">
+        <label for="name">Email</label>
+        <input type="text" name="email">
+        <input type="submit" value="Sign up" id="submitbtnsignup">
     </form>
 
 </div>

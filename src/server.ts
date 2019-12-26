@@ -57,7 +57,35 @@ mongoose.connect('mongodb://mongodb:27017/mydb', {
       lastName : req.body.lastname
     }).then(()=>
       res.redirect('/')
-    );
+    ).catch((err:any) => {
+      res.status(400).send(err.message);
+    });
+  });
+
+  app.post('/signin_verif', (req:any,res:any)=> {
+    const mail = req.body.email;
+    console.log("verification mail")
+
+    User.find({"email":mail}).then((result:any) => {
+      console.log("mail trouvé ---- verification pwd");
+      
+      User.find({"email":mail},{"password":1,"_id":0}).then((pwd:any) => {
+        console.log("pwd :: ok");
+        
+        let iv = Buffer.from(pwd[0], 'hex');
+        let encryptedText = Buffer.from(pwd[1], 'hex');
+        var decripted = secur.decrypt(iv,encryptedText);
+        console.log("decripted :::::" + decripted);
+
+      }).catch((err:any)=>{
+        err.message = "pwd :: not ok";
+        res.status(400).send(err.message);
+      })
+
+    }).catch((err:any) => {
+      err.message = "email :: not ok";
+      res.status(400).send(err.message);
+    });
   });
 
 app.listen(port, (err: Error) => {

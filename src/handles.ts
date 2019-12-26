@@ -86,16 +86,8 @@ Router.get('/write', (req:any, res:any) => {
   });
 });
 
-Router.get('/item/add', (req:any,res:any) => {
-  User.create({
-    email: 'test@Worklet.com',
-    password: req.body.password,
-    firstName : 'hello',
-    lastName : req.body.name
-  }).then(()=>
-    res.redirect('/')
-  );
-})
+
+
 
 
 module.exports = Router;
