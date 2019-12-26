@@ -1,24 +1,56 @@
-# Node.js lab1 - 2019
+# Node.js Project - 2019
 
-## introduction :
-this is a short node js program returning html content on two routes : 
-* `/` is the home content
-* `/hello` is a welcoming page, but return a 404 content if there is no params given
-* `/hello` return a welcoming message to the name giver in parameters, It return a bigger message if name is guillaume
+## About this work :
 
-## running instrucitons : 
-__To setup the project run__ :
-* if you don't installed npm and node yet :
-    * on linux run `sudo apt-get install npm nodejs`
-    * on windows or mac go to nodejs website and follow instructions
-* next run `npm install`
-__your have three options to run the project__ :
-* in this folder type `node index.js`
-* in this folder type `npm start`
-* if you installed nodemon globally, you can run `nodemon index.js`
+This work is out final Node project. It consists of a web API dashboard using Node, Express and MongoDB.
 
-__you can access the content with your web navigator__ :
+Each user can :
 
-* to access the welcome page : `127.0.0.1:8080`
+* Access the `/homepage` page on which he be redirected to sign in or sign up.
+* Access the `/signup` page on which he can register to the database.
+* Access the `/signin` page on which he can log into his profile.
+* Once logged in, access the `/hello` page on which he can create, read, update and delete data.
 
-__Ruben Falvert__
+Each operation the user makes is registered in the database.
+Errors which happens during the navigation are handled and displayed to the user.
+
+## Running instructions :
+
+__Install git__
+* On Linux : run `sudo apt-get install git`
+* On Mac : download the git installer at this address `https://sourceforge.net/projects/git-osx-installer/files/` and follow the instructions
+* On Windows : download the git installer at this address `https://gitforwindows.org/` and follow the instructions
+
+__Clone the project on your computer__
+Run `git clone https://github.com/rubenfh/ProjetWeb.git`
+
+__Install nodejs and npm__
+If you didn't  install npm and node yet, follow :
+* On Linux run `sudo apt-get install npm nodejs`
+* On Mac : download the nodejs installer at this address `https://nodejs.org/en/download/` and follow the instructions
+* On Windows : download the git installer at this address `https://nodejs.org/en/download/` and follow the instructions
+
+__Install the dependencies__
+In the project folder, run `npm install`
+
+__Download docker-compose__
+Follow the instructions for your operating system on this website `https://docs.docker.com/compose/install/`
+
+
+__Start the docker-compose
+Run `docker-compose up`
+
+__ Access the content with your web browser__ :
+Once the docker-compose is up, browse the following URL `127.0.0.1:8081`
+
+##Credits
+
+This project has been made by :
+* __Ruben FALVERT__
+* __Gabriel RUAUD__
+* __Clement FAYOL
+
+Please feel free to contact us :
+* ruben.falvert@edu.ece.fr 
+* gabriel.ruaud@edu.ece.fr
+* clement.fayol@edu.ece.fr
