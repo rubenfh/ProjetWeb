@@ -13,7 +13,7 @@
   <p>Hello</p>
 
   <div class="container">
-    <button type="button" class="btn btn-danger" style="margin-top: 40px;" onclick="window.location.replace('/logout')">
+    <button type="button"onclick="logout()" class="btn btn-danger" style="margin-top: 40px;" onclick="window.location.replace('/logout')">
       Log out
     </button>
     <h1 style="margin-top: 80px;margin-bottom: 20px; font-weight: 700;">Add/Update metrics :</h1>
@@ -44,7 +44,9 @@
 
 
 </div>
-
+<script>
+  function logout() {window.location.replace("/signIn")}
+</script>
 </body>
 
 </html>
