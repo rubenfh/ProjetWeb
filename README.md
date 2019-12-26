@@ -1,5 +1,6 @@
 # Node.js Project - 2019
 
+
 ## About this work :
 
 This work is out final Node project. It consists of a web API dashboard using Node, Express and MongoDB.
@@ -23,9 +24,11 @@ __Install git__
 * On Mac : download the git installer at this address `https://sourceforge.net/projects/git-osx-installer/files/` and follow the instructions
 * On Windows : download the git installer at this address `https://gitforwindows.org/` and follow the instructions
 
+
 __Clone the project on your computer__
 
 Run `git clone https://github.com/rubenfh/ProjetWeb.git`
+
 
 __Install nodejs and npm__
 
@@ -34,10 +37,11 @@ If you didn't  install npm and node yet, follow :
 * On Mac : download the nodejs installer at this address `https://nodejs.org/en/download/` and follow the instructions
 * On Windows : download the git installer at this address `https://nodejs.org/en/download/` and follow the instructions
 
+
 __Install the dependencies__
 
-
 In the project folder, run `npm install`
+
 
 __Download docker-compose__
 
@@ -47,6 +51,7 @@ Follow the instructions for your operating system on this website `https://docs.
 __Start the docker-compose__
 
 Run `docker-compose up`
+
 
 __Access the content with your web browser__
 
