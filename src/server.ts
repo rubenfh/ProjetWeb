@@ -91,6 +91,8 @@ mongoose.connect('mongodb://mongodb:27017/mydb', {
           console.log(pwd[0]._id);
           var url = "/hello?id=" + pwd[0]._id;
           res.redirect(url);
+          const id=pwd[0]._id;
+          console.log(id);
         }else{
           console.log("pwd :: not ok");
           
