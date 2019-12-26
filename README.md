@@ -55,7 +55,7 @@ Run `docker-compose up`
 
 __Access the content with your web browser__
 
-Once the docker-compose is up, browse the following URL `127.0.0.1:8081`
+Once the docker-compose is up, browse the following URL `127.0.0.1:8080`
 
 
 ## Credits :
