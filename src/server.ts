@@ -43,12 +43,15 @@ mongoose.connect('mongodb://mongodb:27017/mydb', {
     var tabpwd = [];
     tabpwd.push(pwd.iv);
     tabpwd.push(pwd.encryptedData);
-    console.log(pwd.iv)
+    tabpwd.push(pwd.key);
+    console.log(pwd.iv);
+    console.log(pwd.key);
+    
 
-    let iv = Buffer.from(pwd.iv, 'hex');
-    let encryptedText = Buffer.from(pwd.encryptedData, 'hex');
-    var decripted = secur.decrypt(iv,encryptedText);
-    console.log("decripted :::::" + decripted);
+    // let iv = Buffer.from(pwd.iv, 'hex');
+    // let encryptedText = Buffer.from(pwd.encryptedData, 'hex');
+    // var decripted = secur.decrypt(iv,encryptedText);
+    // console.log("decripted :::::" + decripted);
 
     User.create({
       email: req.body.email,
@@ -57,7 +60,51 @@ mongoose.connect('mongodb://mongodb:27017/mydb', {
       lastName : req.body.lastname
     }).then(()=>
       res.redirect('/')
-    );
+    ).catch((err:any) => {
+      res.status(400).send(err.message);
+    });
+  });
+
+  app.post('/signin_verif', (req:any,res:any)=> {
+    const mail = req.body.email;
+    console.log("verification mail")
+
+    User.find({"email":mail}).then((result:any) => {
+      console.log("mail trouvé ---- verification pwd");
+      
+      User.find({"email":mail},{"password":1}).then((pwd:any) => {
+        var iv1 = pwd[0].password[0].toString('hex');
+        var encdata = pwd[0].password[1].toString('hex');
+        var key1 = pwd[0].password[2].toString('hex');
+
+        let iv = Buffer.from(iv1, 'hex');
+        let encryptedText = Buffer.from(encdata, 'hex');
+        let key =Buffer.from(key1,'hex');
+
+        var decripted = secur.decrypt(iv,encryptedText,key);
+        decripted = decripted.toString();
+        var password = req.body.password.toString();
+        password = "\""+password+"\""
+
+        if(decripted == password){
+          console.log("pwd :: ok");
+          console.log(pwd[0]._id);
+          var url = "/hello?id=" + pwd[0]._id;
+          res.redirect(url);
+        }else{
+          console.log("pwd :: not ok");
+          
+        }
+
+      }).catch((err:any)=>{
+        // err.message = "pwd :: not find";
+        res.status(400).send(err.message);
+      })
+
+    }).catch((err:any) => {
+      err.message = "email :: not find";
+      res.status(400).send(err.message);
+    });
   });
 
 app.listen(port, (err: Error) => {

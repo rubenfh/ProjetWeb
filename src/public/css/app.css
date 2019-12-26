@@ -32,7 +32,7 @@
   border: none;
   border-radius: 1.5rem;
   width: 25%;
-  padding: 2%;
+  padding: 5%;
   font-weight: 600;
   color: #6c757d;
   background-color: #2fce98;
@@ -42,7 +42,7 @@ input{
   appearance: none;
   background-color: none;
   border: 1px solid #2fce98;
-  line-height: 0;
+  line-height: 0.5;
   font-size: 17px;
   width: 80%;
   display: block;
@@ -137,4 +137,16 @@ input{
   margin-bottom: 3%;
   border-radius: 0.5rem;
   background: #fff;
+}
+
+#submitbtnsignin {
+  margin-top: 10px;
+}
+
+#submitbtnsignup {
+  margin-top: 10px;
+}
+
+.btnHome {
+  width: 10%;
 }
