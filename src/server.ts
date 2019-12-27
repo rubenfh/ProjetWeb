@@ -148,6 +148,7 @@ mongoose.connect('mongodb://mongodb:27017/mydb', {
       res.status(400).send(err.message);
     });
   });
+  
 
   app.get("/hello", (req:any,res:any) => {
     res.render("hello");
