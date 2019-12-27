@@ -58,12 +58,12 @@ Router.get("/signUp", (req: any, res: any) => {
     .render("signUp.ejs")
 });
 
-Router.get("/hello", (req: any, res: any) => {
+/*Router.get("/hello", (req: any, res: any) => {
   res
     .type("html")
     .status(200)
     .render("hello.ejs")
-});
+});*/
 
 Router.get('/read', (req:any, res:any) => {
   User.find({}).then((result: any) => {
@@ -86,9 +86,9 @@ Router.get('/write', (req:any, res:any) => {
   });
 });
 
-Router.get("/hello:id", async (request: any, response: any, next: any) => {
+/*Router.get("/hello:id", async (request: any, response: any, next: any) => {
   var userId = request.params.id
-  /*try {
+  try {
     if (request.query.search) {
       const searchquery = request.query.search;
       const dataUser = await User.find({ id: userId })
@@ -101,13 +101,13 @@ Router.get("/hello:id", async (request: any, response: any, next: any) => {
     }
   } catch(err){
 throw new Error(err);
-  }*/
+  }
   User.find({id: userId}).then((result: any) => {
     response.status(200).json(result);
   }).catch((err: any) => {
     response.status(400).send(err.message);
   });
-  });
+  });*/
 
 
 
