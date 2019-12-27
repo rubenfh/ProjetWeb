@@ -1,5 +1,5 @@
 import express = require("express");
-import { MetricsHandler } from "./metrics";
+import { MetricsHandler, Metric } from "./metrics";
 
 const mongoose = require('mongoose');
 const app = express(),
@@ -60,7 +60,11 @@ mongoose.connect('mongodb://mongodb:27017/mydb', {
     
     Metrics.find((err:any,metrics:any) => {
       if(err) throw err;
-      res.render("hello", {metrics,iduser})
+
+      User.find((err:any,users:any) => {
+        if(err) throw err;        
+        res.render("hello", {metrics,iduser,users})
+      })
     })
   })
 
@@ -70,8 +74,28 @@ mongoose.connect('mongodb://mongodb:27017/mydb', {
       value: req.body.value,
       userid: iduser
     });
-  
-    newMetric.save().then((met:any) => res.redirect('/hello'));
+
+    var AlreadyExist = false;
+
+    Metrics.find((err:any,metrics:any) => {
+      if(err) throw err;
+      metrics.forEach((metric:any) => {
+        if(metric.userid.toString() == iduser.toString()){
+          console.log("id trouvé");        
+          if(newMetric.timestamp.toString() == metric.timestamp.toString()){          
+            AlreadyExist = true;
+            console.log("already exit");
+            console.log(AlreadyExist);
+            Metrics.remove({"userid":iduser, "timestamp":req.body.timestamp},function(err:any,response:any) {});
+            // Metrics.update({ "userid":iduser, "timestamp":req.body.timestamp },{value:req.body.value})
+          }
+        }
+      });
+      newMetric.save().then((met:any) => res.redirect('/hello'));
+    
+    })
+    
+    
   });
 
   exports.test = function (req: any, res: any) {

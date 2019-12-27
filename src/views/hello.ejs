@@ -8,32 +8,53 @@
 <div class="container Accueil">
   <header class="Accueil-Header">
     <h1>NODE PROJECT</h1>
+    <% users.forEach(function(user) { %>
+      <% if(user._id.toString() == iduser.toString()){ %>
+        <h2> Hello <%= user.firstName %></h2>
+    <% }}); %>
   </header>
 </div>
 
 <body>
-  <button type="button" class="btn btn-danger" style="padding: 0%;" onclick="window.location.replace('/')">
-    Log out
-  </button>
+  <div >
+    <button type="button" class="btn btn-danger" style="padding: 0%;" onclick="window.location.replace('/')">
+      Log out
+    </button>
+  </div>
 
-  <form method="post" action="/metric/add">
-    <label for="timestamp">Timestamp</label>
-    <input type="text" name="timestamp">
-    <label for="value">Value</label>
-    <input type="number" name="value">
-    <input type="submit" value="submit">
-  </form>
+  <div>
+    <form method="post" action="/metric/add">
+      <label for="timestamp">Timestamp</label>
+      <input type="text" name="timestamp">
+      <label for="value">Value</label>
+      <input type="number" name="value">
+      <input type="submit" value="submit">
+    </form>
+  </div>
 
-  <h2>Your metrics</h2>
-  <ul>
-    <% metrics.forEach(function(metric) { %>
-      <% if(metric.userid == iduser){ %>
-    <li>
-      timestamp = <%= metric.timestamp %>
-      value = <%= metric.value %>
-    </li>
-    <% }}); %>
-  </ul>
+
+  <div>
+    <h2>Your metrics</h2>
+    <ul>
+      <% users.forEach(function(user) { %>
+        <% if(user._id.toString() == iduser.toString()){ %>
+      <li>lastname = <%= user.lastName %> </li>
+      <li>firstname = <%= user.firstName %></li>
+      <li>email = <%= user.email %></li>
+      <% }}); %>
+    </ul>
+    <p>--------------------</p>
+    <ul>
+      <% metrics.forEach(function(metric) { %>
+        
+        <% if(metric.userid == iduser){ %>
+      <li>
+        timestamp = <%= metric.timestamp %>
+        value = <%= metric.value %>
+      </li>
+      <% }}); %>
+    </ul>
+  </div>
 
 </body>
 
