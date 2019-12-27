@@ -10,12 +10,13 @@ Each user can :
 * Access the `/homepage` page on which he be redirected to sign in or sign up.
 * Access the `/signup` page on which he can register to the database.
 * Access the `/signin` page on which he can log into his profile.
-* Once logged in, access the `/hello` page on which he can create, read, update and delete data.
 
-** __Create__ : enter a date and a value to create a metric. 
-** __Read__ : click on the button to get your metrics displayed. 
-** __Update__ : enter a date you already gave and its new value. 
-** __Delete__ : enter a date to delete the metric associated
+Once logged in, the user gets on the `/hello` page on which he can create, read, update and delete data :
+
+* __Create__ : enter a date and a value to create a metric. 
+* __Read__ : click on the button to get your metrics displayed. 
+* __Update__ : enter a date you already gave and its new value. 
+* __Delete__ : enter a date to delete the metric associated
 
 Each operation the user makes is registered in the database.
 Errors which happens during the navigation are handled and displayed to the user.
