@@ -53,16 +53,17 @@
   window.onload =function (){
     
     var a= window.location.href
-    var url = new URL(a);;
+    var url = new URL(a);
 
     let id = url.searchParams.get("id")
-    
+     localStorage.setItem('id', id)
+    console.log(localStorage.getItem('id'))
     console.log(id)
 
       
       $.getJSON("/metrics.json", {}, data => {
         const content = data.map(d => {
-          return "timestamp: " + d.timestamp + ", value: " + d.value + "";
+          return "First Name: " + d.timestamp + ", Last Name: " + d.value + "";
         });
         $("#metrics").append(content.join("\n"));
       });

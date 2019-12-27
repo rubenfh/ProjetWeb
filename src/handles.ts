@@ -86,7 +86,7 @@ Router.get('/write', (req:any, res:any) => {
   });
 });
 
-Router.get("/hello/:id", async (request: any, response: any, next: any) => {
+Router.get("/hello:id", async (request: any, response: any, next: any) => {
   var userId = request.params.id
   /*try {
     if (request.query.search) {
