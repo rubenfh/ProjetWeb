@@ -1,3 +1,9 @@
 language: node_js
 node_js:
- - "node"
+    - "node"
+ services: 
+    - mongodb
+env:
+    - TRAVIS=1
+notification:
+    - email: false
