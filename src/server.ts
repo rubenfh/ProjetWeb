@@ -9,6 +9,9 @@ const app = express(),
   secur = require("./secur");
 const port: string = process.env.PORT || "8080";
 var User = require('./user');
+const bodyParser = require('body-parser');
+
+
 
 
 mongoose.connect('mongodb://mongodb:27017/mydb', {
@@ -16,8 +19,9 @@ mongoose.connect('mongodb://mongodb:27017/mydb', {
   useNewUrlParser: true,
   useUnifiedTopology: true
 }).then(() => {
+  var iduser : string;
+
   app.set("views", __dirname + "/views");
-  app.set("view engine", "ejs");
 
   app.use(express.static(path.join(__dirname, "public")));
   app.use(express.urlencoded({ extended: true }));
@@ -31,6 +35,43 @@ mongoose.connect('mongodb://mongodb:27017/mydb', {
       }
       res.json(result);
     });
+  });
+
+  const MetricsSchema = new mongoose.Schema({
+    timestamp: {
+      type: String
+    },
+    value: {
+      type: Number,
+      required: true
+    },
+    userid: {
+      type: String,
+      required: true
+    }
+  });
+
+  var Metrics = mongoose.model('metric', MetricsSchema);
+  app.set('view engine', 'ejs');
+  app.use(bodyParser.urlencoded({ extended: false }));
+
+  app.get("/hello", (req:any,res,any) => {
+    console.log("id :: " + iduser);
+    
+    Metrics.find((err:any,metrics:any) => {
+      if(err) throw err;
+      res.render("hello", {metrics,iduser})
+    })
+  })
+
+  app.post('/metric/add', (req:any, res:any) => {
+    const newMetric = new Metrics({
+      timestamp: req.body.timestamp,
+      value: req.body.value,
+      userid: iduser
+    });
+  
+    newMetric.save().then((met:any) => res.redirect('/hello'));
   });
 
   exports.test = function (req: any, res: any) {
@@ -89,16 +130,16 @@ mongoose.connect('mongodb://mongodb:27017/mydb', {
         if(decripted == password){
           console.log("pwd :: ok");
           console.log(pwd[0]._id);
-          var url = "/hello?id=" + pwd[0]._id;
-          res.redirect(url);
-          
+          iduser = pwd[0]._id;
+          res.redirect("/hello");
+          const id=pwd[0]._id;
+          console.log(id);
         }else{
           console.log("pwd :: not ok");
           
         }
 
       }).catch((err:any)=>{
-        // err.message = "pwd :: not find";
         res.status(400).send(err.message);
       })
 
@@ -108,6 +149,10 @@ mongoose.connect('mongodb://mongodb:27017/mydb', {
     });
   });
   
+
+  app.get("/hello", (req:any,res:any) => {
+    res.render("hello");
+  })
 
 app.listen(port, (err: Error) => {
   if (err) {
