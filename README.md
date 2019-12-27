@@ -3,7 +3,7 @@
 
 ## About this work :
 
-This work is out final Node project. It consists of a web API dashboard using Node, Express and MongoDB.
+This work is out final Node project. It consists of a web API dashboard using Node, Express, Mongoose and MongoDB.
 
 Each user can :
 
@@ -11,6 +11,11 @@ Each user can :
 * Access the `/signup` page on which he can register to the database.
 * Access the `/signin` page on which he can log into his profile.
 * Once logged in, access the `/hello` page on which he can create, read, update and delete data.
+
+* __Create__ : enter a date and a value to create a metric. 
+* __Read__ : click on the button to get your metrics displayed. 
+* __Update__ : enter a date you already gave and its new value. 
+* __Delete__ : enter a date to delete the metric associated
 
 Each operation the user makes is registered in the database.
 Errors which happens during the navigation are handled and displayed to the user.
