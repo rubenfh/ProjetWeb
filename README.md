@@ -14,9 +14,9 @@ Each user can :
 Once logged in, the user gets on the `/hello` page on which he can create, read, update and delete data :
 
 * __Create__ : enter a date and a value to create a metric. 
-* __Read__ : click on the button to get your metrics displayed. 
+* __Read__ : the user's metrics will be automatically displayed in the page. 
 * __Update__ : enter a date you already gave and its new value. 
-* __Delete__ : enter a date to delete the metric associated
+* __Delete__ : enter a date and a value couple to delete. 
 
 Each operation the user makes is registered in the database.
 Errors which happens during the navigation are handled and displayed to the user.
