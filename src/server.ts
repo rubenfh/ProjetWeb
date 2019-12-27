@@ -98,6 +98,36 @@ mongoose.connect('mongodb://mongodb:27017/mydb', {
     
   });
 
+  app.post('/metric/delete', (req: any, res: any) => {
+    const newMetric = new Metrics({
+      timestamp: req.body.timestamp,
+      value: req.body.value,
+      userid: iduser
+    });
+
+    var AlreadyExist = false;
+
+    Metrics.find((err: any, metrics: any) => {
+      if (err) throw err;
+      metrics.forEach((metric: any) => {
+        if (metric.userid.toString() == iduser.toString()) {
+          console.log("id trouvé");
+          if (newMetric.timestamp.toString() == metric.timestamp.toString()) {
+            AlreadyExist = true;
+            console.log("already exit");
+            console.log(AlreadyExist);
+            Metrics.remove({ "userid": iduser, "timestamp": req.body.timestamp }, function (err: any, response: any) { });
+            // Metrics.update({ "userid":iduser, "timestamp":req.body.timestamp },{value:req.body.value})
+          }
+        }
+      });
+       res.redirect('/hello');
+
+    })
+
+
+  });
+
   exports.test = function (req: any, res: any) {
     res.render('test');
   };
