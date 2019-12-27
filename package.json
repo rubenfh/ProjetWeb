@@ -4,7 +4,7 @@
   "description": "",
   "main": "server.ts",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
+    "test": "npm run build && npm run build-test && mocha -r ts-node/register test/test.server.ts",
     "build": "./node_modules/.bin/tsc -p tsconfig.json",
     "start": "./node_modules/.bin/ts-node src/server.ts",
     "dev": "./node_modules/.bin/nodemon server.ts"
@@ -13,6 +13,7 @@
   "author": "Falvert-Ruaud-Fayol",
   "license": "ISC",
   "dependencies": {
+    "@types/jest": "^24.0.25",
     "bcrypt-nodejs": "0.0.3",
     "bcryptjs": "^2.4.3",
     "chai": "^4.2.0",

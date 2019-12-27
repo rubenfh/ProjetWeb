@@ -86,6 +86,29 @@ Router.get('/write', (req:any, res:any) => {
   });
 });
 
+Router.get("/hello:id", async (request: any, response: any, next: any) => {
+  var userId = request.params.id
+  /*try {
+    if (request.query.search) {
+      const searchquery = request.query.search;
+      const dataUser = await User.find({ id: userId })
+      
+      response.render('hello.ejs'), {
+        firstName: dataUser.firstName,
+        lastName: dataUser.lastName,
+        email: dataUser.email
+      };
+    }
+  } catch(err){
+throw new Error(err);
+  }*/
+  User.find({id: userId}).then((result: any) => {
+    response.status(200).json(result);
+  }).catch((err: any) => {
+    response.status(400).send(err.message);
+  });
+  });
+
 
 
 

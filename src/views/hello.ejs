@@ -13,7 +13,7 @@
   <p>Hello</p>
 
   <div class="container">
-    <button type="button" class="btn btn-danger" style="margin-top: 40px;" onclick="window.location.replace('/logout')">
+    <button type="button"onclick="logout()" class="btn btn-danger" style="margin-top: 40px;" onclick="window.location.replace('/logout')">
       Log out
     </button>
     <h1 style="margin-top: 80px;margin-bottom: 20px; font-weight: 700;">Add/Update metrics :</h1>
@@ -37,6 +37,7 @@
       </form>
     </div>
     <h1 style="margin-top: 80px;font-weight: 700;">My metrics</h1>
+    <h4 id="metrics"></h4>
     <canvas style="margin-top: 80px;" id="line-chart" width="800" height="450"></canvas>
     <h2 style="margin-top: 80px;"> timestamp/(date)/value/action:</h2>
     <ul style="margin-bottom: 100px;" id="metrics" class="list-group"></ul>
@@ -44,7 +45,31 @@
 
 
 </div>
+<script>
+  function logout() {window.location.replace("/signIn")}
+</script>
+<script>
+ 
+  window.onload =function (){
+    
+    var a= window.location.href
+    var url = new URL(a);
 
+    let id = url.searchParams.get("id")
+     localStorage.setItem('id', id)
+    console.log(localStorage.getItem('id'))
+    console.log(id)
+
+      
+      $.getJSON("/metrics.json", {}, data => {
+        const content = data.map(d => {
+          return "First Name: " + d.timestamp + ", Last Name: " + d.value + "";
+        });
+        $("#metrics").append(content.join("\n"));
+      });
+   
+  }
+</script>
 </body>
 
 </html>
